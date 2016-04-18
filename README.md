@@ -12,4 +12,8 @@ Game-Server cluster data.
 
 ## How to Run:
 
-1. Get the help menu by running: `python kmeans.py --help`
+* Get the help menu by running: `python kmeans-plot.py --help`
+
+or 
+
+* Get the help menu by running: `python kmeans-visualization.py --help`
