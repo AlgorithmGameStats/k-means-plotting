@@ -174,7 +174,11 @@ class KMeans(object):
     """
     Return the index of the centroid the 'item' is closer to
     """
-    return min([(i[0], sqrt(((item[0] - centroids[i[0]][0])**2) + ((item[1] - centroids[i[0]][1])**2)) + ((item[2] - centroids[i[0]][2])**2)) for i in enumerate(centroids)], key=lambda t:t[1])[0]
+    return min([(i[0], sqrt(
+      ((item[0] - centroids[i[0]][0])**2) + 
+      ((item[1] - centroids[i[0]][1])**2) + 
+      ((item[2] - centroids[i[0]][2])**2)
+    )) for i in enumerate(centroids)], key=lambda t:t[1])[0]
 
   def __should_stop(self, old_centroids, centroids, iterations):
     """
