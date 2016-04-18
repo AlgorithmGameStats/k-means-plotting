@@ -132,7 +132,11 @@ class KMeans(object):
       for item in data_set:
         centroid_index = self.__closest_centroid(item, new_centroids) 
         new_clusters[centroid_index].append(item)
+      
+      # recalculate all centroids
+      for centroid_index in range(self.__k):
         new_centroids[centroid_index] = self.__recalculate(new_clusters[centroid_index])
+
       calc_time = (time.clock() - start)
       calc_times.append(calc_time)
       self.__log ( 'New centroids calculation Time: {0}'.format( calc_time ) )
@@ -293,6 +297,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='Calculate KMeans in a graphical way')
   parser.add_argument('-s', '--sleep', help='Time in seconds to wait before new re-draw', type=int, default=5)
   parser.add_argument('-i', '--interactive', help='If the graph should be interactive or driven by time', action='store_true', default=False)
+  parser.add_argument('-m', '--max_iterations', help='Max convergance iterations', type=int, default=5)
   parser.add_argument('file', help='path to the file containing json data from the game server', default='')
 
   # Get/parse arguments
@@ -326,7 +331,7 @@ if __name__ == '__main__':
   k = KMeans(
     class_name="no idea", 
     k=3, 
-    max_iterations=5, 
+    max_iterations=args.max_iterations, 
     canvas=ax, 
     sleep_time=args.sleep, 
     interactive=args.interactive, 
